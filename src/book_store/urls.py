@@ -25,3 +25,4 @@ urlpatterns = [
     path('', UserRegistrationView.as_view(), name='registration'),
     path("add/", CreateBook.as_view(), name="create_book")
 ]
+

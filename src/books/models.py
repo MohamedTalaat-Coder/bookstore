@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 # Create your models here.
 
 class Books(models.Model):
@@ -10,6 +11,7 @@ class Books(models.Model):
     genre = models.CharField(max_length=25)
     price = models.IntegerField()
     date = models.DateField(auto_now_add=True)
+
 
 class Reviews(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
@@ -26,6 +28,7 @@ class Payments(models.Model):
     amount = models.IntegerField()
     date = models.DateField(auto_now_add=True)
 
+
 class BookStore(models.Model):
     store_name = models.CharField(max_length=40)
     location = models.CharField(max_length=40)
@@ -34,6 +37,7 @@ class BookStore(models.Model):
     social_media_link = models.URLField()
     books = models.ManyToManyField(Books)
 
+
 class Orders(models.Model):
     book_id = models.ForeignKey(Books, on_delete=models.CASCADE)
     payment_id = models.ForeignKey(Payments, on_delete=models.CASCADE)
@@ -41,10 +45,12 @@ class Orders(models.Model):
     total_price = models.IntegerField()
     date = models.DateField(auto_now_add=True)
 
+
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -57,10 +63,12 @@ class UserProfile(models.Model):
     watchlist = models.ManyToManyField(Watchlist)
     date = models.DateField(auto_now_add=True)
 
+
 class Coupons(models.Model):
     coupon_code = models.CharField(max_length=40)
     discount = models.IntegerField()
     date = models.DateField(auto_now_add=True)
+
 
 class Discount(models.Model):
     code = models.CharField(max_length=20)
