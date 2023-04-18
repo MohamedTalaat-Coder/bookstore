@@ -24,6 +24,7 @@ class BookStore(models.Model):
     phone_number = models.IntegerField()
     email = models.EmailField()
     social_media_link = models.URLField()
+    books = models.ManyToManyField(Books)
 
 class Orders(models.Model):
     book_id = models.ForeignKey(Books, on_delete=models.CASCADE)
