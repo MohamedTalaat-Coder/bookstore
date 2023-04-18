@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts.views import UserRegistrationView
-from books.views import CreateBook
+from books.views import CreateBook, HomePage
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', UserRegistrationView.as_view(), name='registration'),
-    path("add/", CreateBook.as_view(), name="create_book")
+    path('', CreateBook.as_view(), name='registration'),
+    path("add_book/", CreateBook.as_view(), name="create_book")
 ]
 

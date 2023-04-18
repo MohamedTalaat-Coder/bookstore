@@ -1,0 +1,36 @@
+* {
+    /* border: 2px solid black; */
+}
+
+
+
+nav .top-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0px;    
+}
+
+nav .left ul li:nth-child(2) a{
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+    padding: 0px 10px 0px 10px;
+}
+
+
+nav .left ul li:nth-child(2) {
+    margin: 0px 10px 0px 10px;
+}
+
+nav .right ul li:nth-child(1) a{
+    margin-right: 10px;
+    border-right: 2px solid red;
+    padding: 0px 10px;
+}
