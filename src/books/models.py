@@ -1,5 +1,5 @@
 from django.db import models
-
+from accounts.models import User
 # Create your models here.
 
 class Books(models.Model):
@@ -9,9 +9,53 @@ class Books(models.Model):
     price = models.IntegerField()
     rating = models.IntegerField()
     reviews = models.TextField()
-    buy_option = (
-    ("1", "Cash"),
-    ("2", "Bank Card"),
-    ("3", "PayPal")
-    )
     date = models.DateField(auto_created=True)
+
+class Payments(models.Model):
+    card_number = models.IntegerField()
+    expiry_date = models.DateField()
+    cvv = models.IntegerField()
+    amount = models.IntegerField()
+    date = models.DateField(auto_created=True)
+
+class BookStore(models.Model):
+    store_name = models.CharField(max_length=40)
+    location = models.CharField(max_length=40)
+    phone_number = models.IntegerField()
+    email = models.EmailField()
+    social_media_link = models.URLField()
+
+class Orders(models.Model):
+    book_id = models.ForeignKey(Books, on_delete=models.CASCADE)
+    payment_id = models.ForeignKey(Payments, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    total_price = models.IntegerField()
+    date = models.DateField(auto_created=True)
+
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Books, on_delete=models.CASCADE)
+    date = models.DateField(auto_created=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_number = models.IntegerField()
+    address = models.CharField(max_length=40)
+    city = models.CharField(max_length=40)
+    state = models.CharField(max_length=40)
+    zip_code = models.IntegerField()
+    country = models.CharField(max_length=40)
+    watchlist = models.ManyToManyField(Watchlist)
+    date = models.DateField(auto_created=True)
+
+class Coupons(models.Model):
+    coupon_code = models.CharField(max_length=40)
+    discount = models.IntegerField()
+    date = models.DateField(auto_created=True)
+
+class Discount(models.Model):
+    code = models.CharField(max_length=20)
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    books = models.ManyToManyField('Books')
