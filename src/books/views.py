@@ -10,7 +10,8 @@ class HomePage(ListView):
     template_name = "base.html"
 
 
+
 class CreateBook(CreateView):
-    template_name = "book/create_book.html"
+    template_name = "base.html"
     model = Books
     form_class = BooksForm
